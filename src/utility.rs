@@ -240,7 +240,7 @@ pub fn get_sfb_indices() -> [PosPair; 48] {
 	res.try_into().unwrap()
 }
 
-pub fn get_scissor_indices() -> [PosPair; 26] {
+pub fn get_scissor_indices() -> [PosPair; 27] {
 	let mut res: Vec<PosPair> = Vec::new();
 	//these two are top pinky to ring homerow
 	res.push(PosPair::from_qwerty('q','s'));
