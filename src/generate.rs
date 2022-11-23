@@ -190,7 +190,7 @@ pub struct LayoutGeneration {
 
 	fspeed_vals: [(PosPair, f64); 48],
 	effort_map: [f64; 30],
-	scissor_indices: [PosPair; 24],
+	scissor_indices: [PosPair; 26],
 
 	weighted_bigrams: BigramData,
 	per_char_trigrams: PerCharTrigrams,
