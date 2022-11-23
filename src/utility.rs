@@ -47,6 +47,46 @@ impl PosPair {
 			*AFFECTS_SCISSOR.get_unchecked(self.0) || *AFFECTS_SCISSOR.get_unchecked(self.1)
 		}
 	}
+
+	pub fn qwerty_pos(c: char) -> usize {
+		match c {
+		  'q' => 0,
+		  'w' => 1,
+		  'e' => 2,
+		  'r' => 3,
+		  't' => 4,
+		  'y' => 5,
+		  'u' => 6,
+		  'i' => 7,
+		  'o' => 8,
+		  'p' => 9,
+		  'a' => 10,
+		  's' => 11,
+		  'd' => 12,
+		  'f' => 13,
+		  'g' => 14,
+		  'h' => 15,
+		  'j' => 16,
+		  'k' => 17,
+		  'l' => 18,
+		  ';' => 19,
+		  'z' => 20,
+		  'x' => 21,
+		  'c' => 22,
+		  'v' => 23,
+		  'b' => 24,
+		  'n' => 25,
+		  'm' => 26,
+		  ',' => 27,
+		  '.' => 28,
+		  '/' => 29,
+		  _ => todo!()
+		}
+	}
+
+	pub fn from_qwerty(c1: char, c2: char) -> Self {
+		Self::new(Self::qwerty_pos(c1), Self::qwerty_pos(c2))
+	}
 }
 
 impl std::fmt::Display for PosPair {
@@ -203,25 +243,26 @@ pub fn get_sfb_indices() -> [PosPair; 48] {
 pub fn get_scissor_indices() -> [PosPair; 17] {
 	let mut res: Vec<PosPair> = Vec::new();
 	//these two are top pinky to ring homerow
-	res.push(PosPair(0, 11));
-	res.push(PosPair(9, 18));
+	res.push(PosPair::from_qwerty('q','s'));
+	res.push(PosPair::from_qwerty('p','l'));
 	//these two are pinky home to ring bottom
-	res.push(PosPair(10, 21));
-	res.push(PosPair(19, 28));
+	res.push(PosPair::from_qwerty('a', 'x'));
+	res.push(PosPair::from_qwerty(';', '.'));
 	//these four are inner index stretches
-	res.push(PosPair(2, 24));
-	res.push(PosPair(22, 4));
-	res.push(PosPair(5, 27));
+	res.push(PosPair::from_qwerty('e', 'b'));
+	res.push(PosPair::from_qwerty('c', 't'));
+	res.push(PosPair::from_qwerty('y', ','));
 	//these add normal stretching between ajacent columns that stretch between 2 rows except for
 	//qwerty mi and cr (assuming c is typed with index)
-	for i in [0, 1, 2, 6, 7, 8] {
-		if i != 2 {
-			res.push(PosPair(i, i+21));
-		}
-		if i != 6 {
-			res.push(PosPair(i+1, i+20));
-		}
-	}
+	res.push(PosPair::from_qwerty('q', 'x'));
+	res.push(PosPair::from_qwerty('w', 'z'));
+	res.push(PosPair::from_qwerty('w', 'c'));
+	res.push(PosPair::from_qwerty('e', 'x'));
+	res.push(PosPair::from_qwerty('u', ','));
+	res.push(PosPair::from_qwerty('i', '.'));
+	res.push(PosPair::from_qwerty('o', ','));
+	res.push(PosPair::from_qwerty('o', '/'));
+	res.push(PosPair::from_qwerty('p', '.'));
 	res.try_into().unwrap()
 }
 
