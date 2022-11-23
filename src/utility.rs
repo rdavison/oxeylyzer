@@ -240,7 +240,7 @@ pub fn get_sfb_indices() -> [PosPair; 48] {
 	res.try_into().unwrap()
 }
 
-pub fn get_scissor_indices() -> [PosPair; 17] {
+pub fn get_scissor_indices() -> [PosPair; 18] {
 	let mut res: Vec<PosPair> = Vec::new();
 	//these two are top pinky to ring homerow
 	res.push(PosPair::from_qwerty('q','s'));
@@ -250,6 +250,7 @@ pub fn get_scissor_indices() -> [PosPair; 17] {
 	res.push(PosPair::from_qwerty(';', '.'));
 	//these four are inner index stretches
 	res.push(PosPair::from_qwerty('e', 'b'));
+	res.push(PosPair::from_qwerty('e', 'g'));
 	res.push(PosPair::from_qwerty('c', 't'));
 	res.push(PosPair::from_qwerty('y', ','));
 	//these add normal stretching between ajacent columns that stretch between 2 rows except for
