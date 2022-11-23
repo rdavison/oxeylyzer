@@ -258,6 +258,7 @@ pub fn get_scissor_indices() -> [PosPair; 17] {
 	res.push(PosPair::from_qwerty('w', 'z'));
 	res.push(PosPair::from_qwerty('w', 'c'));
 	res.push(PosPair::from_qwerty('e', 'x'));
+	res.push(PosPair::from_qwerty('r', 'c'));
 	res.push(PosPair::from_qwerty('u', ','));
 	res.push(PosPair::from_qwerty('i', '.'));
 	res.push(PosPair::from_qwerty('o', ','));
