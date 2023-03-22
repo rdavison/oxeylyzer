@@ -347,7 +347,14 @@ impl LayoutGeneration {
 		let scissors = self.scissor_score(layout);
 		let trigram_score = self.trigram_score_iter(layout, &self.data.trigrams);
 
-		trigram_score - effort - fspeed_usage - scissors
+        let mut score = trigram_score - effort - fspeed_usage - scissors;
+
+        if let Some(f) = layout.char_to_finger.get(&'e') {
+            if !(*f == 1 || *f == 2) {
+                score *= -1.
+            }
+        }
+        score
 	}
 
 	fn weighted_bigrams(data: &LanguageData, weights: &Weights) -> BigramData {
