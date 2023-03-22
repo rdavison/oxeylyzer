@@ -349,6 +349,11 @@ impl LayoutGeneration {
 
         let mut score = trigram_score - effort - fspeed_usage - scissors;
 
+        if let Some(f) = layout.char_to_finger.get(&'h') {
+            if !(*f == 1 || *f == 2 || *f == 0 || *f == 3) {
+                score *= if score > 0. { -1.} else { 1. }
+            }
+        }
         if let Some(f) = layout.char_to_finger.get(&'e') {
             if !(*f == 1 || *f == 2) {
                 score *= if score > 0. { -1.} else { 1. }
