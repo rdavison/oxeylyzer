@@ -351,7 +351,7 @@ impl LayoutGeneration {
 
         if let Some(f) = layout.char_to_finger.get(&'e') {
             if !(*f == 1 || *f == 2) {
-                score *= -1.
+                score *= if score > 0. { -1.} else { 1. }
             }
         }
         score
