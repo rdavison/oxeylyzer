@@ -369,8 +369,9 @@ impl LayoutGeneration {
            let Some(u) = layout.char_to_finger.get(&'u')
         {
             if 
-               !(*r == *n && *r != *l) ||
-               !((*e < 4 && *h < 4) || (*e >= 4 && *h >= 4))
+               // !(*r == *n && *r != *l) ||
+               // !((*e < 4 && *h < 4) || (*e >= 4 && *h >= 4)) ||
+               !(*e == 2 || *e == 5)
             {
                 score *= if score > 0. { -1.} else { 1. }
             }
