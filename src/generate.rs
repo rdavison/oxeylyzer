@@ -354,15 +354,41 @@ impl LayoutGeneration {
         //         score *= if score > 0. { -1.} else { 1. }
         //     }
         // }
-        if let Some(n) = layout.char_to_finger.get(&'n') && 
-           let Some(r) = layout.char_to_finger.get(&'r') &&
+        if 
            let Some(e) = layout.char_to_finger.get(&'e') &&
+           let Some(t) = layout.char_to_finger.get(&'t') &&
+           let Some(a) = layout.char_to_finger.get(&'a') &&
+           let Some(o) = layout.char_to_finger.get(&'o') &&
+           let Some(i) = layout.char_to_finger.get(&'i') &&
+           let Some(n) = layout.char_to_finger.get(&'n') && 
+           let Some(s) = layout.char_to_finger.get(&'s') &&
            let Some(h) = layout.char_to_finger.get(&'h') &&
-           let Some(l) = layout.char_to_finger.get(&'l')
+           let Some(r) = layout.char_to_finger.get(&'r') &&
+           let Some(d) = layout.char_to_finger.get(&'d') &&
+           let Some(l) = layout.char_to_finger.get(&'l') &&
+           let Some(u) = layout.char_to_finger.get(&'u')
         {
-            if !(*r == *n && *r != *l) ||
+            if 
+               !(*r == *n && *r != *l) ||
                !((*e < 4 && *h < 4) || (*e >= 4 && *h >= 4))
             {
+                score *= if score > 0. { -1.} else { 1. }
+            }
+
+            let mut nrts = vec![
+                (*e < 4),
+                (*a < 4),
+                (*o < 4),
+                (*i < 4),
+                ((*n < 4 || *h < 4) && (((*n < 4) && (*h >= 4)) || ((*n >= 4) && (*h < 4))))
+            ];
+            nrts.sort();
+            match nrts.as_slice() {
+                [true, true, true, true, false]
+            |   [false, true, true, true, true]
+            |   [false, false, false, false, true]
+            |   [true, false, false, false, false] => (),
+            | _ =>
                 score *= if score > 0. { -1.} else { 1. }
             }
         }
